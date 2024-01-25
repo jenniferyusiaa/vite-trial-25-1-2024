@@ -1,0 +1,6 @@
+.images img {
+  object-fit: cover;
+  height: 30rem;
+  aspect-ratio: 1/1.2;
+  border-radius: 1rem;
+}

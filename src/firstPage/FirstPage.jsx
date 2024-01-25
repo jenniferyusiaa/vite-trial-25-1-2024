@@ -5,6 +5,7 @@ const FirstPage = () => {
   return (
     <div className={styles.firstPage}>
       <Header />
+      <h1>Hello World</h1>
     </div>
   );
 };

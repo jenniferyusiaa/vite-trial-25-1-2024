@@ -1,0 +1,21 @@
+.body {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 70rem;
+  font-size: 5.2rem;
+  margin: 6rem 0 6rem 0;
+}
+
+.body .navLink {
+  margin: 0 2.5rem 0 0;
+}
+
+.navLink a,
+.navLink a i {
+  all: unset;
+  letter-spacing: -3px;
+  cursor: pointer;
+  display: flex;
+  overflow: hidden;
+}

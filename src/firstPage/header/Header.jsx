@@ -1,30 +1,77 @@
 import styles from "./header.module.css";
 import Nav from "./nav/Nav";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  heightBackground,
+  opacity,
+  translateHeaderMainRight,
+  translateLogo,
+} from "./animation";
 
 const Header = () => {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
   return (
     <div className={styles.header}>
       <div className={styles.headerMain}>
         <div className={styles.headerMainLeft}>
-          <div className={styles.logo}>
-            <a href="https://i.pinimg.com/564x/86/47/60/864760de0e53457abd94c4345b50969a.jpg">
-              Jenn
-            </a>
-          </div>
+          <AnimatePresence>
+            {!isNavOpen && (
+              <motion.div
+                variants={translateLogo}
+                initial="initial"
+                animate="enter"
+                exit="exit"
+                className={styles.logo}
+              >
+                <a href="https://i.pinimg.com/564x/cb/e2/4e/cbe24e4a1e9f3b87b280ec0f1285b95e.jpg">
+                  jenn.
+                </a>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <AnimatePresence>
+            {isNavOpen && (
+              <motion.div
+                variants={translateLogo}
+                initial="initial"
+                animate="enter"
+                exit="exit"
+                className={styles.logo}
+              >
+                <a href="https://i.pinimg.com/564x/cb/e2/4e/cbe24e4a1e9f3b87b280ec0f1285b95e.jpg">
+                  arilhisyam.
+                </a>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
-        <div className={styles.headerMainMiddle}>
+        <div
+          className={styles.headerMainMiddle}
+          onMouseDown={() => {
+            setIsNavOpen(!isNavOpen);
+          }}
+        >
           <div className={styles.hamburgerIcon}>
-            <span></span>
-            <span></span>
+            <span className={isNavOpen && styles.spanCrossed}></span>
+            <span className={isNavOpen && styles.spanCrossed}></span>
           </div>
           <div className={styles.hamburgerLabel}>
             <span>Menu</span>
-            <span>Close</span>
+            <motion.span variants={opacity} initial="initial">
+              Close
+            </motion.span>
           </div>
         </div>
-        
-        <div className={styles.headerMainRight}>
+
+        <motion.div
+          variants={translateHeaderMainRight}
+          initial="initial"
+          animate={isNavOpen ? "close" : "open"}
+          className={styles.headerMainRight}
+        >
           <div className={styles.shopLabel}>
             <a href="https://i.pinimg.com/564x/82/b0/aa/82b0aa636f42cc4f69808a0856074430.jpg">
               Shop
@@ -52,9 +99,22 @@ const Header = () => {
               <span>{`Cart (${0})`}</span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
-      <Nav />
+      <AnimatePresence>
+        {isNavOpen && (
+          <>
+            <Nav />
+            <motion.div
+              variants={heightBackground}
+              initial="initial"
+              animate="enter"
+              exit="exit"
+              className={styles.background}
+            ></motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

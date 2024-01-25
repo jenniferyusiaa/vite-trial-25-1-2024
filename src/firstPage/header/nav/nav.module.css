@@ -1,3 +1,5 @@
-.nav h1 {
-  font-size: 10rem;
+.nav {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
 }
